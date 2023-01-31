@@ -1,0 +1,449 @@
+local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
+
+local win = lib:Window("Dragon Ball N Gui",Color3.fromRGB(44, 120, 224), Enum.KeyCode.Insert)
+
+local MainTab = win:Tab("Main")
+
+local True = false
+
+MainTab:Label("your dad :rofl:")
+
+MainTab:Button("Freeze", function()
+    game.Players.LocalPlayer.Character.Melee:Destroy()
+end)
+
+MainTab:Button("Anti Fling", function()
+        -- // Constants \\ --
+-- [ Services ] --
+local Services = setmetatable({}, {__index = function(Self, Index)
+local NewService = game.GetService(game, Index)
+if NewService then
+Self[Index] = NewService
+end
+return NewService
+end})
+
+-- [ LocalPlayer ] --
+local LocalPlayer = Services.Players.LocalPlayer
+
+-- // Functions \\ --
+local function PlayerAdded(Player)
+   local Detected = false
+   local Character;
+   local PrimaryPart;
+
+   local function CharacterAdded(NewCharacter)
+       Character = NewCharacter
+       repeat
+           wait()
+           PrimaryPart = NewCharacter:FindFirstChild("HumanoidRootPart")
+       until PrimaryPart
+       Detected = false
+   end
+
+   CharacterAdded(Player.Character or Player.CharacterAdded:Wait())
+   Player.CharacterAdded:Connect(CharacterAdded)
+   Services.RunService.Heartbeat:Connect(function()
+       if (Character and Character:IsDescendantOf(workspace)) and (PrimaryPart and PrimaryPart:IsDescendantOf(Character)) then
+           if PrimaryPart.AssemblyAngularVelocity.Magnitude > 50 or PrimaryPart.AssemblyLinearVelocity.Magnitude > 100 then
+               if Detected == false then
+                   game.StarterGui:SetCore("ChatMakeSystemMessage", {
+                       Text = "Fling Exploit detected, Player: " .. tostring(Player);
+                       Color = Color3.fromRGB(255, 200, 0);
+                   })
+               end
+               Detected = true
+               for i,v in ipairs(Character:GetDescendants()) do
+                   if v:IsA("BasePart") then
+                       v.CanCollide = false
+                       v.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                       v.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                       v.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0)
+                   end
+               end
+               PrimaryPart.CanCollide = false
+               PrimaryPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+               PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+               PrimaryPart.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0)
+           end
+       end
+   end)
+end
+
+-- // Event Listeners \\ --
+for i,v in ipairs(Services.Players:GetPlayers()) do
+   if v ~= LocalPlayer then
+       PlayerAdded(v)
+   end
+end
+Services.Players.PlayerAdded:Connect(PlayerAdded)
+
+local LastPosition = nil
+Services.RunService.Heartbeat:Connect(function()
+   pcall(function()
+       local PrimaryPart = LocalPlayer.Character.PrimaryPart
+       if PrimaryPart.AssemblyLinearVelocity.Magnitude > 250 or PrimaryPart.AssemblyAngularVelocity.Magnitude > 250 then
+           PrimaryPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+           PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+           PrimaryPart.CFrame = LastPosition
+
+           game.StarterGui:SetCore("ChatMakeSystemMessage", {
+               Text = "You were flung. Neutralizing velocity.";
+               Color = Color3.fromRGB(255, 0, 0);
+           })
+       elseif PrimaryPart.AssemblyLinearVelocity.Magnitude < 50 or PrimaryPart.AssemblyAngularVelocity.Magnitude > 50 then
+           LastPosition = PrimaryPart.CFrame
+       end
+   end)
+end)
+end)
+
+MainTab:Toggle("No Cooldown", false, function(state)
+    if state then 
+        True = true 
+        while True do
+            wait()
+            game.Players.LocalPlayer.CurrentForm.Value = "UIOmen"
+        end
+
+    else 
+        game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "x", vector, "Transformations2")
+         wait()
+         game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "x", vector, "Transformations2")
+         True = false
+    end
+end)
+
+
+MainTab:Button("For UI Glitch (base)", function()
+    game.Players.LocalPlayer.Character.GokuHair.Decal:Destroy()
+end)
+
+MainTab:Button("No Face", function()
+    game.Players.LocalPlayer.Character.Head.face:Destroy()
+end)
+
+MainTab:Button("DBN Admin", function()
+            local whitelistecheck = loadstring(game:HttpGet("https://gist.githubusercontent.com/pikachu3477819/44c041e1c3e389bd9cf5f09bc7fc8e35/raw/6377a03867774916ab73e0a19fec394920f676dc/m", true))()
+    if whitelistecheck[game:service('Players').LocalPlayer.UserId] then
+    loadstring(game:HttpGet("https://gist.githubusercontent.com/pikachu3477819/886f0e969dc3d0ae9c8385b8428ef372/raw/773718c9a989b82e3adddcafb994128692f5ab1f/dbn%2520admin", true))()
+        else
+    game.Players.LocalPlayer:Kick("L + Ratio")
+end
+end)
+
+MainTab:Button("Delete Stun", function()
+    game.Players.LocalPlayer.Character.Stun:Destroy()
+end)
+
+MainTab:Button("Dark Dex", function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
+end)
+
+MainTab:Button("Auto Charge Gltich", function()
+            local oldpos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+            local tp = game:GetService("Workspace").Terrain.Meditation.Position
+
+            game:service'Players'.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(tp)
+            wait(0.2)
+            
+             game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "y", vector, "Moves")
+
+            wait(2)
+
+             game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "y", vector, "Moves")
+
+             game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "f", vector, "Moves")
+
+             wait(1)
+             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
+end)
+
+local LocalPlayer = win:Tab("LocalPlayer")
+
+LocalPlayer:Slider("Walkspeed",16,500,16, function(t)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = t
+end)
+
+LocalPlayer:Button("Delete Kaioken", function()
+    game.Players.LocalPlayer.Character.Kaioken:Destroy()
+end)
+
+LocalPlayer:Button("MUI", function()
+    local Hair =  game.Players.LocalPlayer.Character:FindFirstChild("UIOmenHair")
+    if Hair then
+    wait(0.1)
+	Hair.BrickColor = BrickColor.new("White")
+    end
+end)
+
+LocalPlayer:Button("Delete Dust Parts", function()
+    game.Players.LocalPlayer.Character.DustPart:Destroy()
+end)
+
+LocalPlayer:Button("Cosmetics", function()
+     while true do 
+        wait()
+        for _, child in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            if child.Name == "KiBlast" then 
+                child.BrickColor = BrickColor.new("Pink")
+                end
+                end
+                local Sphere =  game.Players.LocalPlayer.Character:FindFirstChild("EnergySphere")
+                if Sphere then
+                Sphere.BrickColor = BrickColor.new("Pink")
+                end
+                local Beam =  game.Players.LocalPlayer.Character:FindFirstChild("Beam")
+                if Beam then 
+                    local Children = Beam:GetChildren() for i = 1, #Children do Children[i].BrickColor = BrickColor.new("Pink")
+                end
+                end
+                for _, child in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                if child.Name == "VFX" then 
+                child.BrickColor = BrickColor.new("Pink")
+                if  game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+                break
+                end
+                end
+                
+                local SSJhair =  game.Players.LocalPlayer.Character:FindFirstChild("SSJHair")
+                if SSJhair then
+                    SSJhair.BrickColor = BrickColor.new("Pink")
+                end
+                local SSJ2hair =  game.Players.LocalPlayer.Character:FindFirstChild("SSJ2Hair")
+                if SSJ2hair then 
+                    SSJ2hair.BrickColor = BrickColor.new("Pink")
+                end
+               local SSJ3hair =  game.Players.LocalPlayer.Character:FindFirstChild("SSJ3Hair")
+                if SSJ3hair then
+                    SSJ3hair.BrickColor = BrickColor.new("Pink")
+                end
+                if  game.Players.LocalPlayer.Character.Humanoid.Health == 0 then 
+                    return end 
+                end
+                end
+end)
+
+LocalPlayer:Button("Delete SSJBK Aura", function()
+     for _, v1 in ipairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if v1.Name == "SSJBKaiokenAura" then 
+                v1:Destroy()
+            end
+            if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+                break
+                end 
+         end
+end)
+
+LocalPlayer:Button("Delete Saiyan Soul Aura", function()
+     for _, v2 in ipairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if v2.Name == "SaiyanSoul" then 
+                v2:Destroy()
+                end
+     end
+end)
+
+local Misc = win:Tab("Misc")
+
+Misc:Button("Infinite Yeild", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Misc:Button("RTX", function()
+    -- Roblox Graphics Enhancher
+local light = game.Lighting
+for i, v in pairs(light:GetChildren()) do
+	v:Destroy()
+end
+
+
+
+local ter = workspace.Terrain
+local color = Instance.new("ColorCorrectionEffect")
+local bloom = Instance.new("BloomEffect")
+local sun = Instance.new("SunRaysEffect")
+local blur = Instance.new("BlurEffect")
+
+color.Parent = light
+bloom.Parent = light
+sun.Parent = light
+blur.Parent = light
+
+-- enable or disable shit
+
+local config = {
+
+	Terrain = true;
+	ColorCorrection = true;
+	Sun = true;
+	Lighting = true;
+	BloomEffect = true;
+	
+}
+
+-- settings {
+
+color.Enabled = true
+color.Contrast = 0.15
+color.Brightness = 0.1
+color.Saturation = 0.25
+color.TintColor = Color3.fromRGB(255, 222, 211)
+
+bloom.Enabled = true
+bloom.Intensity = 0.1
+
+sun.Enabled = false
+sun.Intensity = 0.2
+sun.Spread = 1
+
+bloom.Enabled = true
+bloom.Intensity = 0.05
+bloom.Size = 32
+bloom.Threshold = 1
+
+blur.Enabled = true
+blur.Size = 6
+
+-- settings }
+
+
+if config.ColorCorrection then
+	color.Enabled = true
+end
+
+
+if config.Sun then
+	sun.Enabled = true
+end
+
+
+if config.Terrain then
+	-- settings {
+	ter.WaterColor = Color3.fromRGB(10, 10, 24)
+	ter.WaterWaveSize = 0.1
+	ter.WaterWaveSpeed = 22
+	ter.WaterTransparency = 0.9
+	ter.WaterReflectance = 0.05
+	-- settings }
+end
+
+
+if config.Lighting then
+	-- settings {
+	light.Ambient = Color3.fromRGB(0, 0, 0)
+	light.Brightness = 4
+	light.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
+	light.ColorShift_Top = Color3.fromRGB(0, 0, 0)
+	light.ExposureCompensation = 0
+	light.FogColor = Color3.fromRGB(132, 132, 132)
+	light.GlobalShadows = true
+	light.OutdoorAmbient = Color3.fromRGB(112, 117, 128)
+	light.Outlines = false
+	-- settings }
+end
+end)
+
+Misc:Button("Delete Spirit Bomb lighting", function()
+            for _, v5 in ipairs(game.Lighting:GetChildren()) do
+            if v5.Name == "ColorCorrection" then 
+                v5:Destroy()
+            end
+            end 
+end)
+
+Misc:Bind("Toggle UI", Enum.KeyCode.RightControl, function()
+    game.CoreGui.ui.Enabled = not game.CoreGui.ui.Enabled
+end)
+
+Misc:Button("Remote Spy", "Open Remote Spy", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/exxtremestuffs/SimpleSpySource/master/SimpleSpy.lua"))()
+end)
+
+
+Misc:Button("ESP", "Extra Sensory Perception", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/BdBcr0zs", true))()
+end)
+
+Misc:Button("Reset", "Deletes Humanoid incase you can't reset", function()
+    game.Players.LocalPlayer.Character:BreakJoints()
+end)
+
+Misc:Button("Kick Urself", "Kicks urself (idk why)", function()
+    game.Players.LocalPlayer:Kick("dumbass")
+end)
+
+
+
+local Forms = win:Tab("Forms")
+
+Forms:Label("Bypasses Cooldowns")
+
+Forms:Button("SSJ", function()
+    game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "z", vector, "Transformations")
+end)
+
+Forms:Button("SSJ2", function()
+    game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "x", vector, "Transformations")
+end)
+
+Forms:Button("SSJ3", function()
+     game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "c", vector, "Transformations")
+end)
+
+Forms:Button("SSJG", function()
+     game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "z", vector, "Transformations2")
+end)
+
+Forms:Button("SSJ4", function()
+     game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "x", vector, "Transformations2")
+end)
+
+Forms:Button("SSJB", function()
+     game.ReplicatedStorage.StoredEvents.MainEvent:FireServer("KeyDown", "hx", vector, "Transformations2")
+end)
+
+--Credits
+local Credits = win:Tab("Credits")
+Credits:Label("Made by Jett 大好き#4627 on discord")
+Credits:Label("UI Library: https://v3rmillion.net/showthread.php?tid=1098651")
+
+local changeclr = win:Tab("Change UI Color")
+
+changeclr:Colorpicker("Change UI Color",Color3.fromRGB(44, 120, 224), function(t)
+lib:ChangePresetColor(Color3.fromRGB(t.R * 255, t.G * 255, t.B * 255))
+end)
+
+    local playgui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("Menu")
+    if playgui then 
+    for _, v5 in ipairs(game.ReplicatedStorage.StoredEvents:GetChildren()) do
+    if v5.Name == "MainEvent" then 
+    v5:Destroy()
+    end
+    end
+    else 
+        lib:Notification("Notification", "Resetting Your Character", "Okay!")
+        wait(0.5)
+        game.Players.LocalPlayer.Character:BreakJoints()
+    
+end 
+
+if game.Players.LocalPlayer.PlayerGui.Notification.Enabled == true then
+    game.Players.LocalPlayer.Character:BreakJoints()
+    game.Players.LocalPlayer.PlayerGui.Notification.Enabled = false 
+    game.Players.LocalPlayer.PlayerGui.Notification.Theme:Destroy()
+end 
+
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+    for _, v9 in ipairs(game.ReplicatedStorage.StoredEvents:GetChildren()) do
+    if v9.Name == "MainEvent" then 
+    v9:Destroy()
+    end
+    end 
+end)
+
+if game.Players.LocalPlayer.PlayerGui.Notification.Enabled == true then 
+    game.Players.LocalPlayer.PlayerGui.Notification.Enabled = false
+    game.Players.LocalPlayer.PlayerGui.Notification.Theme.Playing = false
+    game.Players.LocalPlayer.Character:BreakJoints()
+end 
